@@ -1,0 +1,91 @@
+操作说明：
+WSAD，：上下左右
+J ：攻击
+
+    /*从fp中，读出资格整形数字，保存到data钟
+     *boos出现钱，4个值分别
+     *           是初始位置           0～640：      普通飞机出现位置3
+     *                              800：        添加BOOS
+     *                              999：        游戏结束
+     *           飞机类型(            -1：         不添加
+     *                               0～5：       普通飞机
+     *                               6,7          道具
+     *                               11～15：       BOOS）,
+     *           移动类型             0～5
+     *           移动限制位置          0～800
+     */
+    /*BOOS出现后，4个值分别是
+     *            操作类型          0：移动方式， 1：攻击方式， 2：武器类型， 300：BOOS活动结束
+     *            更改类型          移动：0～8,攻击0～  ，武器类型：3～
+     */
+     
+     
+     
+     enum SHOOT_MODE{
+    //普通敌人
+    NONE,           //不攻击0
+    SHOOT_ONE,      //发射一个1
+    SHOOT_HTWO,     //竖向，快数发射两个2
+    SHOOT_WTWO,     //横向，一次发射两个3
+    FAST_ONE,       //快速射击4
+    FAST_HTWO,      //5
+    FAST_WTWO,      //6
+    //BOOS                      
+    FASTEST_WWTTO,  //宽急速，两发7
+    SHOOT_MESSY,    //混乱射击8
+
+};
+
+//敌人移动方式
+enum MOVE_MODE{
+    STOP,           //停止0
+    WALK_I,         //向下1
+    WALK_L,         //向左2
+    WALK_R,         //想右3
+    WALK_SL,        //向左下4
+    WALK_SR,        //向右下5
+    WALK_LD,        //到达一定高度，向左走6
+    WALK_RD,        //到达一定高度，向右走7
+    WALK_STOP,      //到达一定高度后停下来8
+};
+
+
+    //敌人子弹，
+    //红色圆型
+    bullets[3].image = al_load_bitmap("./data/image/emb_1.png");
+    
+    
+    
+    
+    
+    
+    //黄色普通飞机，
+    propes[0].image = al_load_bitmap("./data/image/ep_1.png");
+
+    //蓝色普通飞机，均衡
+    propes[1].image = al_load_bitmap("./data/image/ep_2.png");
+    propes[1].bullet = &bullets[3];
+
+    //红色普通飞机，急速
+    propes[2].image = al_load_bitmap("./data/image/ep_3.png");
+
+    //黄色高级飞机
+    propes[3].image = al_load_bitmap("./data/image/ep_4.png");
+
+    //红白高级飞机
+    propes[4].image = al_load_bitmap("./data/image/eq_5.png");
+
+    //绿色主角机
+    propes[5].image = al_load_bitmap("./data/image/eq_6.png");
+
+    //紫白色飞行器
+    propes[5].image = al_load_bitmap("./data/image/eq_7.png");
+    propes[5].bullet = &bullets[3];
+
+
+//****************************
+    //武器升级道具
+    propes[4].image = al_load_bitmap("./data/image/myb_up.png");
+
+    //生命回复道具
+    propes[5].image = al_load_bitmap("./data/image/health_up.png");

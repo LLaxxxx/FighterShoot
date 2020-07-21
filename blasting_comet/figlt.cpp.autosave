@@ -1,0 +1,29 @@
+#include "figlt.h"
+
+
+ALLEGRO_BITMAP *boom1;
+ALLEGRO_BITMAP *boom2;
+ALLEGRO_BITMAP *boom3;
+ALLEGRO_BITMAP *boom4;
+ALLEGRO_BITMAP *boom5;
+
+bool is_collsion(fighter *fi, shoots *sh)//击中敌方
+{
+    hit.num = 0;//
+    for(int i=0; i<MAX_BULLET && sh->keynum; i++){
+        if(BULLET(i).key && is_fighter_bullet(fi, &BULLET(i))){
+            BULLET(i).key = false;
+            sh->keynum--;//击中目标消失
+            hit.be_hit[hit.num++][0] = BULLET(i).dx;//向hit添加绘制击中效果的位置
+            hit.be_hit[hit.num++][1] = BULLET(i).dy;
+            
+            fi->health -= sh->hurt;
+        }
+    }
+}
+bool is_fighter_bullet(fighter *fi, shoot *s)
+{
+    int fix = fi->side_x + fi->width;
+    int fiy = fi->side_y + fi->height;
+    return ( s->dy < fiy && s->dx < fix ) && ( s->dx > fi->side_x && s->dy > fi->side_y);
+}
